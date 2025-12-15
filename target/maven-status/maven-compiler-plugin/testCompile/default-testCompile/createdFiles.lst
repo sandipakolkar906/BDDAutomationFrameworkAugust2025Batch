@@ -1,0 +1,14 @@
+com\qa\pages\LoginPage.class
+com\qa\pages\DashboardPage.class
+com\qa\util\ElementActions.class
+com\qa\stepdefinations\DashboardWidgetStepDefs.class
+com\qa\util\CaptureScreenshot.class
+com\qa\pages\BuzzPage.class
+com\qa\util\ReadProperties.class
+com\qa\runner\Runner.class
+com\qa\base\Base.class
+com\qa\pages\PIMPage.class
+com\qa\util\GetSystemDateandTime.class
+com\qa\stepdefinations\BuzzCRUDSteps.class
+com\qa\util\WaitMethods.class
+com\qa\stepdefinations\EmployeeCRUDSteps.class
