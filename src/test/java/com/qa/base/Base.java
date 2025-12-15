@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.qa.util.ReadProperties;
 
-/**
+/*
  * @author Punam
  * This class has common methods to start and close the browsers for all the test cases 
  */
