@@ -3,6 +3,7 @@ package com.qa.stepdefinations;
 import com.qa.base.Base;
 import com.qa.pages.BuzzPage;
 import com.qa.pages.ClaimsPage;
+import com.qa.pages.EventPage;
 import com.qa.pages.LoginPage;
 import com.qa.util.CaptureScreenshot;
 import com.qa.util.ReadProperties;
@@ -22,6 +23,7 @@ public class ClaimsCRUDSteps extends Base {
 	Scenario scenario;
 	LoginPage objLoginPage;
 	ClaimsPage objClaimsPage;
+	EventPage objEventPage;
 
 	@Before
 	public void startApplication(Scenario scenario) {
@@ -81,6 +83,52 @@ public class ClaimsCRUDSteps extends Base {
 		scenario.embed(CaptureScreenshot.captureImage(driver), "image/png");
 	}
 
+	// Steps to create Event
+	
+	@When("^I navigate to Configuration menu and Select Event option$")
+	public void i_navigate_to_Configuration_menu_and_Select_Event_option() throws Throwable {
+		scenario.write("NAvigating to event page ");
+		objEventPage= new EventPage(driver,scenario);
+		objEventPage.navigateToConfigurationMenu();
+		objEventPage.NaviagteToEventOption();
+		WaitMethods.staticWait(5000);
+		scenario.embed(CaptureScreenshot.captureImage(driver), "image/png");
+		
+		
+	}
+
+	@When("^I add new Event with below event Name$")
+	public void i_add_new_Event_with_below_event_Name(DataTable eventNameTable) throws Throwable {
+		scenario.write("CReatring new claim ");
+		objEventPage.createNewEvent(eventNameTable.raw().get(0).get(1));
+		WaitMethods.staticWait(5000);
+		scenario.embed(CaptureScreenshot.captureImage(driver), "image/png");
+	}
+
+	@Then("^I Search Event with below eventName$")
+	public void i_Search_Event_with_below_eventName(DataTable eventNameTable) throws Throwable {
+		scenario.write("Searching the new Event");
+		Assert.assertEquals(eventNameTable.raw().get(0).get(1), objEventPage.searchEventByName(eventNameTable.raw().get(0).get(1)));
+		WaitMethods.staticWait(5000);
+		scenario.embed(CaptureScreenshot.captureImage(driver), "image/png");
+	}
+
+	@When("^I edit the Event and change name$")
+	public void i_edit_the_Event_and_change_name(DataTable eventNameTableappendtext) throws Throwable {
+		scenario.write("Editing the event");
+		objEventPage.editEventName(eventNameTableappendtext.raw().get(0).get(1));
+		WaitMethods.staticWait(5000);
+		scenario.embed(CaptureScreenshot.captureImage(driver), "image/png");
+	}
+
+	@Then("^I delete the newly added and updated Event$")
+	public void i_delete_the_newly_added_and_updated_Event() throws Throwable {
+		scenario.write("Deleting  the event");
+		objEventPage.deleteEvent();
+		WaitMethods.staticWait(5000);
+		scenario.embed(CaptureScreenshot.captureImage(driver), "image/png");
+	}
+	
 	@After
 	public void closeApplication() {
 		scenario.write("Closing the browser and application!");
